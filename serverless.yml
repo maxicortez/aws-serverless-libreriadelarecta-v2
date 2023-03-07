@@ -1,0 +1,71 @@
+
+service: libreriadelarecta-backend
+
+plugins:
+  - serverless-offline
+
+custom:
+  settings:
+    localDev:
+      NODE_ENV: development
+      DATABASE_HOST: localhost
+      DATABASE_PORT: 3306
+      DATABASE_NAME: cloud-gestion2
+      DATABASE_USER: root
+      DATABASE_PASSWORD: qazwsx3
+      SECRET_TOKEN: mysecretToken
+    dev:
+      NODE_ENV: development
+      DATABASE_HOST: ls-a256863795fb652e6e1eeb1b1343bdc8910c945a.co7u31leuawd.us-east-1.rds.amazonaws.com
+      DATABASE_PORT: 3306
+      DATABASE_NAME: db-libreriadelarecta-dev
+      DATABASE_USER: dbmasteruser
+      DATABASE_PASSWORD: ^mD)KdfV3~uyizcl02)`;1_orx[faW56
+      SECRET_TOKEN: mysecretToken
+    prod:
+      NODE_ENV: production
+      DATABASE_HOST: ls-a256863795fb652e6e1eeb1b1343bdc8910c945a.co7u31leuawd.us-east-1.rds.amazonaws.com
+      DATABASE_PORT: 3306
+      DATABASE_NAME: db-libreriadelarecta
+      DATABASE_USER: dbmasteruser
+      DATABASE_PASSWORD: ^mD)KdfV3~uyizcl02)`;1_orx[faW56
+      SECRET_TOKEN: +*_tbgr9.-|7PC$7x.lk,G7b^5L3a~0,
+
+  serverless-offline:
+    noPrependStageInUrl: true
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  environment: 
+    NODE_ENV: ${self:custom.settings.${opt:stage}.NODE_ENV}
+    DATABASE_HOST: ${self:custom.settings.${opt:stage}.DATABASE_HOST}
+    DATABASE_PORT: ${self:custom.settings.${opt:stage}.DATABASE_PORT}
+    DATABASE_NAME: ${self:custom.settings.${opt:stage}.DATABASE_NAME}
+    DATABASE_USER: ${self:custom.settings.${opt:stage}.DATABASE_USER}
+    DATABASE_PASSWORD: ${self:custom.settings.${opt:stage}.DATABASE_PASSWORD}
+    SECRET_TOKEN: ${self:custom.settings.${opt:stage}.SECRET_TOKEN}
+
+functions:
+  app:
+    handler: handler.generic
+    events:
+      - http:
+          path: /
+          method: ANY
+          cors: true
+          
+      - http: 
+          path: /{proxy+}
+          method: ANY
+          cors: true
+
+  test:
+    handler: handler.test
+    events:
+      - http:
+          path: /test
+          method: post
+
