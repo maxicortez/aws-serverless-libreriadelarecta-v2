@@ -34,6 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(require("./src/routes/info.router"));
 app.use(require("./src/routes/users.router"));
 app.use(require("./src/routes/materiales.router"));
+app.use(require("./src/routes/categorias.router"));
 
 // Inicio de servidor HTTP
 // app.listen(app.get("port"), ()=> {

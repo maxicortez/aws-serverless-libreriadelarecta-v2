@@ -6,8 +6,6 @@ const cors = require('cors');
 const path = require('path');
 const rfs = require('rotating-file-stream');
 const fs = require('fs-extra');
-const https = require('https');
-// const { connection } = require("./database/db")
 
 // Inicializar Express
 const app = express();
@@ -40,19 +38,9 @@ app.set("port", process.env.PORT)
 app.use(require("./routes/info.router"));
 app.use(require("./routes/users.router"));
 app.use(require("./routes/materiales.router"));
-
-
-// Inicio de servidor HTTPS SSL
-// https.createServer({
-//     cert: fs.readFileSync("certificate-ssl.crt"), 
-//     key: fs.readFileSync("certificate-ssl.key")
-// }, app).listen(app.get("port"), ()=> {
-//     console.log('Server run on port HTTPS SSL', app.get("port"), "Ambiente", process.env.NODE_ENV)
-//     // connection.sync({ force: false }).then( ()=> console.log("Server Database connected"))
-// });
+app.use(require("./routes/cayegorias.router"));
 
 // Inicio de servidor HTTP
 app.listen(app.get("port"), ()=> {
     console.log('Server run on port HTTP', app.get("port"), "Ambiente", process.env.NODE_ENV)
-    // connection.sync({ force: false }).then( ()=> console.log("Server Database connected"))
 });

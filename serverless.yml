@@ -1,5 +1,5 @@
 
-service: libreriadelarecta-backend
+service: libreriadelarecta-backend-v2
 
 plugins:
   - serverless-offline
@@ -10,7 +10,7 @@ custom:
       NODE_ENV: development
       DATABASE_HOST: localhost
       DATABASE_PORT: 3306
-      DATABASE_NAME: cloud-gestion2
+      DATABASE_NAME: db-libreriadelarecta-v2
       DATABASE_USER: root
       DATABASE_PASSWORD: qazwsx3
       SECRET_TOKEN: mysecretToken
@@ -18,7 +18,7 @@ custom:
       NODE_ENV: development
       DATABASE_HOST: ls-a256863795fb652e6e1eeb1b1343bdc8910c945a.co7u31leuawd.us-east-1.rds.amazonaws.com
       DATABASE_PORT: 3306
-      DATABASE_NAME: db-libreriadelarecta-dev
+      DATABASE_NAME: db-libreriadelarecta-v2
       DATABASE_USER: dbmasteruser
       DATABASE_PASSWORD: ^mD)KdfV3~uyizcl02)`;1_orx[faW56
       SECRET_TOKEN: mysecretToken
@@ -26,10 +26,10 @@ custom:
       NODE_ENV: production
       DATABASE_HOST: ls-a256863795fb652e6e1eeb1b1343bdc8910c945a.co7u31leuawd.us-east-1.rds.amazonaws.com
       DATABASE_PORT: 3306
-      DATABASE_NAME: db-libreriadelarecta
+      DATABASE_NAME: db-libreriadelarecta-v2
       DATABASE_USER: dbmasteruser
       DATABASE_PASSWORD: ^mD)KdfV3~uyizcl02)`;1_orx[faW56
-      SECRET_TOKEN: +*_tbgr9.-|7PC$7x.lk,G7b^5L3a~0,
+      SECRET_TOKEN: +*_tbGr9.-|7PC$7x.lk,G7b^5L3A~9.
 
   serverless-offline:
     noPrependStageInUrl: true
