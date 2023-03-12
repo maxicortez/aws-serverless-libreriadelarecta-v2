@@ -10,10 +10,30 @@ const getAllCategorias = async (req, res) => {
     }
 };
 
+const categoriasByDescription = async (req, res) => {
+    try {
+        const { descripcion } = req.body;
+        if (descripcion == undefined || typeof descripcion !== "string") {
+            res.status(500).json({ error: true, message: "Require 'descripcion' type 'string" });
+            return;
+        }
+        var query 
+        if (descripcion.trim() === "") {
+            query = "SELECT idCategoria, descripcion, esActivo, fechaRegistro FROM categoria"
+        } else {
+            query = `SELECT idCategoria, descripcion, esActivo, fechaRegistro FROM categoria WHERE descripcion like '%${descripcion}%'`
+        }
+        const [rows] = await mysqlConnection.query(query);
+        rows.map((row) => row.esActivo = row.esActivo === 0 ? false : true);
+        res.status(200).json(rows);
+    } catch (error) {
+        res.status(500).json({ error: true, message: "error" });
+    }
+};
+
 const createCategoria = async (req, res) => {
     try {
         const { descripcion, esActivo } = req.body;
-        console.log("esActivo:", esActivo);
         if (descripcion == undefined || typeof descripcion !== "string" || descripcion.trim() === "") {
             res.status(500).json({ error: true, message: "Require 'descripcion' type 'string" });
             return;
@@ -70,6 +90,7 @@ const deleteCategoria = async (req, res) => {
 
 module.exports = {
     getAllCategorias,
+    categoriasByDescription,
     createCategoria,
     updateCategoria,
     deleteCategoria,
